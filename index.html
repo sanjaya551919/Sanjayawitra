@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sanjaya Com</title>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <style>
+    * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    html, body { margin: 0; padding: 0; height: 100%; background: black; }
+    .login-bg { position: fixed; inset: 0; background: linear-gradient(to bottom, #0f2b55, #1a4ba0); z-index: 0; }
+    .anime-char { position: fixed; bottom: 0; right: 0; width: 200px; z-index: 1; }
+    .login-container { position: relative; z-index: 2; background: #fff; padding: 30px; border-radius: 15px; width: 90%; max-width: 320px; margin: 100px auto; text-align: center; }
+    input, textarea { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; }
+    button { padding: 10px 16px; background: #0072ff; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; }
+    .message { margin-top: 10px; font-size: 14px; display: none; }
+    .loading-container { position: fixed; inset: 0; background: #0b1e3f; display: flex; justify-content: center; align-items: center; flex-direction: column; visibility: hidden; opacity: 0; transition: opacity 1s ease; z-index: 10; }
+    .loading-container.active { visibility: visible; opacity: 1; }
+    .spinner { width: 60px; height: 60px; border: 6px solid transparent; border-top: 6px solid red; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text { color: white; font-size: 20px; animation: fadeInOut 2s infinite; }
+    @keyframes fadeInOut { 0%, 100% {opacity:1;} 50% {opacity:0.5;} }
+    .main-menu { display: none; background: #f4f4f4; min-height: 100vh; position: relative; z-index: 5; }
+    .navigation { position: sticky; top: 0; background-color: navy; padding: 10px; z-index: 100; }
+    .navigation h1 { font-size: 22px; color: white; }
+    .navigation ul { display: flex; gap: 12px; list-style: none; padding: 0; margin: 10px 0 0; overflow-x: auto; }
+    .navigation li a { color: white; text-decoration: none; padding: 8px 12px; display: block; border-radius: 6px; }
+    .navigation li a:hover { background-color: rgba(255,255,255,0.2); }
+    .main-content { padding: 20px; }
+    .section { display: none; }
+    .section.active { display: block; }
+    .product-list, .news-list { margin-top: 10px; }
+    .product-item, .news-item { background: #fff; padding: 12px; border-radius: 10px; margin-bottom: 10px; box-shadow: 0 0 4px rgba(0,0,0,0.1); }
+    .product-item img, .news-item img { width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
+    .product-item button { width: 48%; margin: 2px 1%; background: #ff5722; font-size: 14px; }
+    .logout-button { position: fixed; top: 12px; right: 12px; font-size: 24px; background: white; color: navy; border-radius: 50%; padding: 8px; cursor: pointer; z-index: 200; box-shadow: 0 0 5px rgba(0,0,0,0.3); }
+  </style>
+</head>
+<body>
+  <div class="login-bg"></div>
+  <img src="https://i.ibb.co/GvB7pCP/blue-archive-char.png" class="anime-char" />
+  <div class="login-container" id="loginBox">
+    <h2>Login Manual</h2>
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="manualLogin()">Login Manual</button>
+    <div style="margin: 20px 0;">Atau</div>
+    <div id="g_id_onload"
+         data-client_id="129639880980-f03fu684qfhudoou1fefot0ji9eetj06.apps.googleusercontent.com"
+         data-callback="handleGoogleLogin"
+         data-auto_prompt="true"
+         data-auto_select="true">
+    </div>
+    <div class="g_id_signin"
+         data-type="standard"
+         data-shape="pill"
+         data-theme="filled_blue"
+         data-text="continue_with"
+         data-size="large"
+         data-logo_alignment="left">
+    </div>
+    <div class="message" id="msg"></div>
+  </div>
+</body>
+</html>
